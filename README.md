@@ -1,6 +1,6 @@
 # Laravel Gemini Search
 
-AI-powered natural language database search using Google Gemini in Laravel.
+AI-powered natural language database search using Google Gemini in Laravel with **multi-query support** and **intelligent result descriptions**.
 
 ## Requirements
 
@@ -48,7 +48,7 @@ GEMINI_API_KEY=your-api-key-here
 ```php
 use Coderubix\GeminiSearch\Facades\GeminiSearch;
 
-$results = GeminiSearch::runSearch("Find all active users");
+$results = GeminiSearch::runSearch("Find all active users and count total orders");
 ```
 
 ### Service Injection
@@ -73,7 +73,7 @@ The package automatically registers a route at `/api/search`:
 ```bash
 POST /api/search
 {
-    "query": "Find users who registered this month"
+    "query": "Find users who registered this month and count their orders"
 }
 ```
 
@@ -92,10 +92,54 @@ GEMINI_TEMPERATURE=0.1
 
 - **Natural Language Processing**: Convert plain English to SQL queries
 - **AI-Powered**: Uses Google Gemini 1.5 Flash model for intelligent query generation
+- **Multi-Query Support**: Handles complex requests with multiple SQL queries
+- **Performance Optimized**: Automatically limits to 5 queries for optimal speed
 - **SQL Injection Protection**: Only allows SELECT queries with built-in validation
-- **Smart Prompts**: Optimized prompts for clean, raw SQL output
+- **Smart Descriptions**: AI-generated descriptions for each result (SQL hidden from users)
 - **Auto-suggestions**: Generates related search suggestions
 - **Schema Awareness**: Automatically detects and uses your database structure
+- **Structured Responses**: Clean, professional JSON output format
+
+## Response Format
+
+The package now returns structured JSON responses with AI-generated descriptions:
+
+```json
+{
+  "summary": "Processed 3 queries for user and order information",
+  "performance_note": "Limited to 5 queries for optimal speed",
+  "results": [
+    {
+      "description": "Count of total users in the system",
+      "data": [{"count": 150}],
+      "type": "count",
+      "safe": true
+    },
+    {
+      "description": "List of active users with registration dates",
+      "data": [{"id": 1, "name": "John Doe", "active": true}],
+      "type": "select",
+      "safe": true
+    }
+  ],
+  "suggestions": [
+    "Show users with recent orders",
+    "Find inactive users",
+    "List users by order count"
+  ],
+  "total_queries_processed": 2,
+  "queries_ignored": 0,
+  "all_safe": true
+}
+```
+
+### Key Benefits:
+
+✅ **SQL Queries Hidden**: End users never see actual SQL syntax
+✅ **AI Descriptions**: Natural language explanations of each result
+✅ **Multi-Query Support**: Handle complex requests efficiently
+✅ **Performance Control**: 5-query limit ensures optimal speed
+✅ **Professional Output**: Clean, structured JSON responses
 
 ## Testing
 
@@ -115,7 +159,7 @@ Or with PHPUnit directly:
 
 ### Local Testing
 
-For development and testing, you can use our test script:
+For development and testing, you can use our enhanced test script:
 
 ```bash
 # Install dependencies
@@ -124,7 +168,7 @@ composer require google-gemini-php/client
 # Create .env with your API key
 echo "GEMINI_API_KEY=your-real-api-key" > .env
 
-# Run comprehensive tests
+# Run comprehensive tests including multi-query functionality
 php test-package.php
 ```
 
@@ -134,15 +178,26 @@ The package includes built-in SQL injection protection by:
 - Only allowing SELECT queries
 - Validating query types before execution
 - Using parameterized queries where possible
+- AI prompt optimization for clean SQL output
+- Multi-query validation and safety checks
+
+## Performance
+
+- **Query Limit**: Maximum 5 queries per request for optimal performance
+- **Smart Parsing**: Efficient query parsing and validation
+- **Error Handling**: Graceful handling of failed queries
+- **Performance Notes**: Automatic warnings when limits are reached
+- **Configurable Limit**: Set via `MAX_QUERIES` constant in service class
 
 ## Troubleshooting
 
 ### Common Issues
 
 1. **"Class Gemini\Client not found"**: The package will automatically install `google-gemini-php/client`
-2. **"Invalid API key"**: Verify your `GEMINI_API_KEY` in `.env`
+2. **"Invalid API key"**: Verify your `GEMINI_API_KEY` in `.env` (no quotes needed)
 3. **"Unsafe query generated"**: The AI generated a non-SELECT query (safety feature)
 4. **"Target class [config] does not exist"**: This is normal in standalone testing, will work in Laravel
+5. **Multiple queries ignored**: Performance optimization limits to 5 queries (check performance_note)
 
 ### Debug Mode
 
