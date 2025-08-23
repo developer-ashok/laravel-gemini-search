@@ -3,8 +3,8 @@
 namespace Coderubix\GeminiSearch\Services;
 
 use Illuminate\Support\Facades\DB;
-use Google\GenerativeAI\GenerativeModel;
-use Google\GenerativeAI\Client;
+use Gemini\Client;
+use Gemini\GenerativeModel;
 
 class GeminiSearchService
 {
@@ -12,7 +12,7 @@ class GeminiSearchService
 
     public function __construct()
     {
-        $apiKey = config('gemini.api_key');
+        $apiKey = config('gemini-search.api_key');
         $client = new Client($apiKey);
         $this->model = new GenerativeModel('gemini-1.5-flash', $client);
     }
