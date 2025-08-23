@@ -14,7 +14,7 @@ This package automatically includes the Google Gemini API PHP client as a depend
 
 When you install our package, Composer will automatically install:
 - `coderubix/laravel-gemini-search` (our package)
-- `gemini-api-php/client` (Google Gemini API client)
+- `google-gemini-php/client` (Google Gemini API client)
 - All required dependencies
 
 ## Installation
@@ -88,7 +88,18 @@ GEMINI_MAX_TOKENS=1000
 GEMINI_TEMPERATURE=0.1
 ```
 
+## Features
+
+- **Natural Language Processing**: Convert plain English to SQL queries
+- **AI-Powered**: Uses Google Gemini 1.5 Flash model for intelligent query generation
+- **SQL Injection Protection**: Only allows SELECT queries with built-in validation
+- **Smart Prompts**: Optimized prompts for clean, raw SQL output
+- **Auto-suggestions**: Generates related search suggestions
+- **Schema Awareness**: Automatically detects and uses your database structure
+
 ## Testing
+
+### Package Testing
 
 Run the test suite:
 
@@ -102,6 +113,21 @@ Or with PHPUnit directly:
 ./vendor/bin/phpunit
 ```
 
+### Local Testing
+
+For development and testing, you can use our test script:
+
+```bash
+# Install dependencies
+composer require google-gemini-php/client
+
+# Create .env with your API key
+echo "GEMINI_API_KEY=your-real-api-key" > .env
+
+# Run comprehensive tests
+php test-package.php
+```
+
 ## Security
 
 The package includes built-in SQL injection protection by:
@@ -113,9 +139,10 @@ The package includes built-in SQL injection protection by:
 
 ### Common Issues
 
-1. **"Class GeminiAPI\Client not found"**: Make sure `gemini-api-php/client` is installed
+1. **"Class Gemini\Client not found"**: The package will automatically install `google-gemini-php/client`
 2. **"Invalid API key"**: Verify your `GEMINI_API_KEY` in `.env`
 3. **"Unsafe query generated"**: The AI generated a non-SELECT query (safety feature)
+4. **"Target class [config] does not exist"**: This is normal in standalone testing, will work in Laravel
 
 ### Debug Mode
 
