@@ -3,8 +3,8 @@
 namespace Coderubix\GeminiSearch\Services;
 
 use Illuminate\Support\Facades\DB;
-use Gemini\Client;
-use Gemini\GenerativeModel;
+use GeminiAPI\Client;
+use GeminiAPI\GenerativeModel;
 
 class GeminiSearchService
 {
