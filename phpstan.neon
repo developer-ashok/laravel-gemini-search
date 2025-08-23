@@ -1,0 +1,13 @@
+parameters:
+    level: 8
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - vendor
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+        - '#Call to an undefined method Illuminate\\Database\\Connection::select#'
+        - '#Call to an undefined method Illuminate\\Support\\Facades\\Schema::getColumnListing#'
+    tmpDir: .phpstan

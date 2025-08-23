@@ -1,100 +1,98 @@
 # Laravel Gemini Search
 
-🚀 Natural language database search for Laravel using **Google Gemini AI**.  
-This package lets you query your database in plain English.  
-It will automatically generate safe `SELECT` SQL queries, run them, and return results in JSON — plus suggest follow-up queries.
+AI-powered natural language database search using Google Gemini in Laravel.
 
----
+## Requirements
 
-## 📦 Installation
+- **PHP**: ^8.2
+- **Laravel**: ^11.0
+- **Google Gemini API**: Active API key
+
+## Installation
 
 ```bash
 composer require coderubix/laravel-gemini-search
 ```
 
-Publish the config:
+## Configuration
+
+Publish the configuration file:
 
 ```bash
 php artisan vendor:publish --tag=gemini-search-config
 ```
 
----
-
-## ⚙️ Configuration
-
-In `.env`, set your Gemini API key:
+Add your Gemini API key to your `.env` file:
 
 ```env
-GEMINI_API_KEY=your_api_key_here
+GEMINI_API_KEY=your-api-key-here
 ```
 
-You can customize defaults in `config/gemini-search.php`.
+## Usage
 
----
+### Basic Search
 
-## 🚀 Usage
+```php
+use Coderubix\GeminiSearch\Facades\GeminiSearch;
 
-### API Endpoint
-This package provides an API route:
+$results = GeminiSearch::runSearch("Find all active users");
+```
 
-```http
-POST /api/ai-search
-Content-Type: application/json
+### Service Injection
 
+```php
+use Coderubix\GeminiSearch\Services\GeminiSearchService;
+
+class UserController extends Controller
 {
-  "query": "Show me all users created in the last 7 days"
+    public function search(Request $request, GeminiSearchService $searchService)
+    {
+        $results = $searchService->runSearch($request->input('query'));
+        return response()->json($results);
+    }
 }
 ```
 
-### Example Response
-```json
+## API Endpoint
+
+The package automatically registers a route at `/api/search`:
+
+```bash
+POST /api/search
 {
-  "query": "SELECT * FROM users WHERE created_at >= NOW() - INTERVAL 7 DAY;",
-  "results": [
-    {"id":1, "name":"John Doe", "email":"john@example.com", "created_at":"2025-08-16"}
-  ],
-  "suggestions": [
-    "Users registered last month",
-    "Users without email verified",
-    "Active users with orders"
-  ]
+    "query": "Find users who registered this month"
 }
 ```
 
----
+## Testing
 
-## ✅ Features
+Run the test suite:
 
-- Parses your **database schema** automatically.
-- Uses **Gemini AI** to generate **safe SELECT queries**.
-- **Validates queries** (no `DELETE`, `UPDATE`, `DROP` allowed).
-- Returns results in **JSON format**.
-- Suggests **follow-up queries** to refine your search.
+```bash
+composer test
+```
 
----
+Or with PHPUnit directly:
 
-## 🛡 Security
+```bash
+./vendor/bin/phpunit
+```
 
-- Only `SELECT` queries are executed.  
-- Query validation prevents destructive SQL.  
-- You should still review prompts carefully for edge cases.
+## Security
 
----
+The package includes built-in SQL injection protection by:
+- Only allowing SELECT queries
+- Validating query types before execution
+- Using parameterized queries where possible
 
-## 📚 Roadmap
+## Contributing
 
-- [ ] Support for vector/semantic search (embeddings).  
-- [ ] Artisan CLI command: `php artisan ai:search "latest orders"`.  
-- [ ] Query caching for performance.  
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Submit a pull request
 
----
+## License
 
-## 🤝 Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you’d like to add.
-
----
-
-## 📄 License
-
-MIT
+The MIT License (MIT). Please see [License File](LICENSE) for more information.

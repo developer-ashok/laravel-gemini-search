@@ -1,0 +1,46 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.2, 8.3]
+        laravel: [11.*]
+        dependency-version: [prefer-stable]
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite
+        tools: composer:v2
+        coverage: xdebug
+
+    - name: Install dependencies
+      run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+    - name: Execute tests (Unit and Feature)
+      run: vendor/bin/phpunit --coverage-clover=coverage.xml
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
