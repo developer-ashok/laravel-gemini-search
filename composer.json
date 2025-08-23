@@ -7,7 +7,7 @@
     "authors": [
         {
             "name": "Coderubix",
-            "email": "info@coderubix.com"
+            "email": "developer703@gmail.com"
         }
     ],
     "autoload": {
@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.0",
-        "google-gemini-php/laravel": "^1.0"
+        "google/generative-ai": "^0.2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0",
