@@ -21,7 +21,7 @@ class GeminiSearchService
         }
         
         $client = new Client($apiKey);
-        $this->model = new GenerativeModel('gemini-1.5-flash', $client);
+        $this->model = $client->generativeModel('gemini-1.5-flash');
     }
 
     public function generateQuery(string $userPrompt): string
