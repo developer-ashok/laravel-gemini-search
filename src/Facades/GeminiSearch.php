@@ -1,6 +1,6 @@
 <?php
 
-namespace Ashok\GeminiSearch\Facades;
+namespace Coderubix\GeminiSearch\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

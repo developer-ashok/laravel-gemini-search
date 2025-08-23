@@ -1,9 +1,9 @@
 <?php
 
-namespace Ashok\GeminiSearch\Http\Controllers;
+namespace Coderubix\GeminiSearch\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Ashok\GeminiSearch\Services\GeminiSearchService;
+use Coderubix\GeminiSearch\Services\GeminiSearchService;
 
 class SearchController
 {

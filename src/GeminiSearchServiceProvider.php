@@ -1,9 +1,9 @@
 <?php
 
-namespace Ashok\GeminiSearch;
+namespace Coderubix\GeminiSearch;
 
 use Illuminate\Support\ServiceProvider;
-use Ashok\GeminiSearch\Services\GeminiSearchService;
+use Coderubix\GeminiSearch\Services\GeminiSearchService;
 
 class GeminiSearchServiceProvider extends ServiceProvider
 {

@@ -9,7 +9,7 @@ It will automatically generate safe `SELECT` SQL queries, run them, and return r
 ## 📦 Installation
 
 ```bash
-composer require ashok/laravel-gemini-search
+composer require coderubix/laravel-gemini-search
 ```
 
 Publish the config:

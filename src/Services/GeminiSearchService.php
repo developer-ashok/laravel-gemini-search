@@ -1,6 +1,6 @@
 <?php
 
-namespace Ashok\GeminiSearch\Services;
+namespace Coderubix\GeminiSearch\Services;
 
 use Illuminate\Support\Facades\DB;
 use Gemini\Facades\Gemini;

@@ -1,11 +1,11 @@
 {
-    "name": "ashok/laravel-gemini-search",
+    "name": "coderubix/laravel-gemini-search",
     "description": "AI-powered natural language database search using Google Gemini in Laravel.",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Ashok\\GeminiSearch\\": "src/"
+            "Coderubix\\GeminiSearch\\": "src/"
         }
     },
     "require": {
@@ -17,10 +17,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ashok\\GeminiSearch\\GeminiSearchServiceProvider"
+                "Coderubix\\GeminiSearch\\GeminiSearchServiceProvider"
             ],
             "aliases": {
-                "GeminiSearch": "Ashok\\GeminiSearch\\Facades\\GeminiSearch"
+                "GeminiSearch": "Coderubix\\GeminiSearch\\Facades\\GeminiSearch"
             }
         }
     }

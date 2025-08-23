@@ -1,6 +1,6 @@
 <?php
 
-namespace Ashok\GeminiSearch\Services;
+namespace Coderubix\GeminiSearch\Services;
 
 class QueryValidator
 {
