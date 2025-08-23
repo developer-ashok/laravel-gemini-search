@@ -1,0 +1,27 @@
+{
+    "name": "ashok/laravel-gemini-search",
+    "description": "AI-powered natural language database search using Google Gemini in Laravel.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ashok\\GeminiSearch\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.1",
+        "laravel/framework": "^11.0",
+        "google-gemini-php/laravel": "^1.0",
+        "doctrine/dbal": "^3.6"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ashok\\GeminiSearch\\GeminiSearchServiceProvider"
+            ],
+            "aliases": {
+                "GeminiSearch": "Ashok\\GeminiSearch\\Facades\\GeminiSearch"
+            }
+        }
+    }
+}
