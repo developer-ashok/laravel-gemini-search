@@ -113,7 +113,7 @@ The package includes built-in SQL injection protection by:
 
 ### Common Issues
 
-1. **"Class Gemini\Client not found"**: Make sure `gemini-api-php/client` is installed
+1. **"Class GeminiAPI\Client not found"**: Make sure `gemini-api-php/client` is installed
 2. **"Invalid API key"**: Verify your `GEMINI_API_KEY` in `.env`
 3. **"Unsafe query generated"**: The AI generated a non-SELECT query (safety feature)
 

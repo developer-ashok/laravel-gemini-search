@@ -13,6 +13,13 @@ class GeminiSearchService
     public function __construct()
     {
         $apiKey = config('gemini-search.api_key');
+        
+        if (empty($apiKey)) {
+            throw new \Exception(
+                'Gemini API key not found. Please set GEMINI_API_KEY in your .env file and publish the config with: php artisan vendor:publish --tag=gemini-search-config'
+            );
+        }
+        
         $client = new Client($apiKey);
         $this->model = new GenerativeModel('gemini-1.5-flash', $client);
     }
