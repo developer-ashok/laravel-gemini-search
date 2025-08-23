@@ -30,7 +30,7 @@ class GeminiSearchService
 
         $prompt = "You are an SQL assistant for a Laravel app. Schema: $schema. " .
                   "Task: Convert the user's request into a safe SELECT query only. " .
-                  "User Request: $userPrompt. IMPORTANT: Only return raw SQL.";
+                  "User Request: $userPrompt. IMPORTANT: Only return raw SQL. Return only final query raw query no prefix or postfix";
 
         $response = $this->model->generateContent($prompt);
         return trim($response->text());
