@@ -206,6 +206,20 @@ Enable debug mode in your `.env`:
 APP_DEBUG=true
 ```
 
+
+---
+
+## 📞 Contact Information
+
+**Developer:** Ashok Chandrapal 👨‍💻  
+**Phone:** +91 9033359874 📱  
+**Email:** developer7039@gmail.com ✉️  
+**GitHub:** [github.com/developer-ashok](https://github.com/developer-ashok) 🐙  
+**LinkedIn:** [linkedin.com/in/ashok-chandrapal](https://linkedin.com/in/ashok-chandrapal) 💼
+
+---
+
+
 ## Contributing
 
 1. Fork the repository
